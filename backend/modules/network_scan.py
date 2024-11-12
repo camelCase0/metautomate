@@ -44,8 +44,10 @@ def run_nmap_scan(ip_range, options):
         nmap_args.append("-F")
     if options.get("port_range"):
         nmap_args.append(f"-p {options['port_range']}")
-    if options.get("script"):
-        nmap_args.append(f"--script {options['script']}")
+    scripts = options.get("scripts", [])
+    if scripts:
+        script_args = ",".join(scripts)
+        nmap_args.append(f"--script {script_args}")
     if options.get("max_rtt_timeout"):
         nmap_args.append(f"--max-rtt-timeout {options['max_rtt_timeout']}")
     if options.get("host_timeout"):

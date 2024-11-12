@@ -1,5 +1,5 @@
 import logging
-from typing import Optional
+from typing import List, Optional
 from fastapi import FastAPI, HTTPException, Request, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -40,7 +40,7 @@ async def start_scan(
     ping_scan: Optional[bool] = Form(False),
     fast_scan: Optional[bool] = Form(False),
     port_range: Optional[str] = Form(""),
-    script: Optional[str] = Form(""),
+    script: Optional[List[str]] = Form(None),
     max_rtt_timeout: Optional[str] = Form(""),
     host_timeout: Optional[str] = Form(""),
     retries: Optional[int] = Form(3),
@@ -55,7 +55,7 @@ async def start_scan(
         "ping_scan": ping_scan,
         "fast_scan": fast_scan,
         "port_range": port_range or "",
-        "script": script or "",
+        "scripts": script or [],
         "max_rtt_timeout": max_rtt_timeout or "",
         "host_timeout": host_timeout or "",
         "retries": retries,

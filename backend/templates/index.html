@@ -18,12 +18,14 @@
     <!-- Network Scan Form -->
     <section id="scan" class="{% if scan_results %}hidden{% endif %}">
         <h2>Network Scan</h2>
-        <form action="/scan" method="post">
+        <form action="/scan" method="post" onsubmit="prepareScripts()">
             <label for="ip_range">Target IP Range:</label>
             <input type="text" name="ip_range" placeholder="Enter IP range (e.g., 192.168.0.0/24)" required>
 
             <!-- Additional form options -->
             <div class="form-section">
+
+                
                 <h3>Scan Types</h3>
                 <div class="checkbox-group">
                     <label><input type="checkbox" name="service_version" checked> Service Version Detection (-sV)</label>
@@ -34,23 +36,79 @@
                     <label><input type="checkbox" name="ping_scan"> Ping Scan (-sn)</label>
                     <label><input type="checkbox" name="fast_scan"> Fast Scan (-F)</label>
                 </div>
-                <h3>Port and Script Options</h3>
+                
+                <h3>Port Options</h3>
                 <label for="port_range">Port Range:</label>
                 <input type="text" name="port_range" placeholder="e.g., 1-1000">
                 
-                <label for="script">Nmap Script:</label>
-                <select name="script" id="script-select">
-                    <option value="">Select a script</option>
-                    <option value="http-title">http-title (Get web server title)</option>
-                    <option value="ftp-anon">ftp-anon (Check for anonymous FTP access)</option>
-                    <option value="ssh-hostkey">ssh-hostkey (Get SSH host key)</option>
-                    <option value="smb-os-discovery">smb-os-discovery (Discover OS info via SMB)</option>
-                    <option value="ssl-cert">ssl-cert (Retrieve SSL certificate info)</option>
-                    <option value="dns-brute">dns-brute (DNS subdomain brute-force)</option>
-                    <option value="mysql-info">mysql-info (Retrieve MySQL info)</option>
-                    <option value="other">Other (Specify custom script)</option>
-                </select>
-                <input type="text" id="custom-script-input" name="script" placeholder="Enter custom script name" style="display: none;">
+                <h3>Script Options</h3>
+                <div id="selected-scripts" class="badge-container"></div>
+                
+                <div class="category-title category-title-service-enum" onclick="toggleCategory('service-enum')">Service Enumeration:</div>
+                <div class="script-options" id="service-enum" multiple>
+                    <label><input type="checkbox" value="default,safe">run service enumeration scripts(ALL)</label><br>
+                    <label><input type="checkbox" value="http-title">http-title (Webpage title)</label><br>
+                    <label><input type="checkbox" value="ssh-hostkey">ssh-hostkey (SSH host key fingerprint)</label><br>
+                    <label><input type="checkbox" value="ftp-anon">ftp-anon (Anonymous FTP login)</label><br>
+                    <label><input type="checkbox" value="smtp-commands">smtp-commands (Supported SMTP commands)</label><br>
+                    <label><input type="checkbox" value="mysql-info">mysql-info (MySQL server info)</label><br>
+                    <label><input type="checkbox" value="pop3-capabilities">pop3-capabilities (POP3 server capabilities)</label><br>
+                    <label><input type="checkbox" value="imap-capabilities">imap-capabilities (IMAP server capabilities)</label><br>
+                    <label><input type="checkbox" value="smb-os-discovery">smb-os-discovery (SMB OS discovery)</label><br>
+                </div>
+            
+                <div class="category-title category-title-vuln-detection" onclick="toggleCategory('vuln-detection')">Vulnerability Detection:</div>
+                <div class="script-options" id="vuln-detection" multiple>
+                    <label><input type="checkbox" value="vuln">Vulnerability Detection Scripts(ALL)</label><br>
+                    <label><input type="checkbox" value="ssl-heartbleed">ssl-heartbleed (Heartbleed check)</label><br>
+                    <label><input type="checkbox" value="http-shellshock">http-shellshock (Shellshock vulnerability)</label><br>
+                    <label><input type="checkbox" value="ftp-vsftpd-backdoor">ftp-vsftpd-backdoor (vsftpd backdoor)</label><br>
+                    <label><input type="checkbox" value="smb-vuln-ms17-010">smb-vuln-ms17-010 (EternalBlue)</label><br>
+                    <label><input type="checkbox" value="http-cve2017-5638">http-cve2017-5638 (Apache Struts CVE)</label><br>
+                    <label><input type="checkbox" value="smtp-vuln-cve2011-1720">smtp-vuln-cve2011-1720 (Postfix vuln)</label><br>
+                </div>
+            
+                <div class="category-title category-title-brute-force" onclick="toggleCategory('brute-force')">Brute-Force and Login Testing:</div>
+                <div class="script-options" id="brute-force" multiple>
+                     <label><input type="checkbox" value="brute, auth">Brute and login(ALL)</label><br>
+                     <label><input type="checkbox" value="ftp-brute">ftp-brute (FTP brute-force)</label><br>
+                     <label><input type="checkbox" value="ssh-brute">ssh-brute (SSH brute-force)</label><br>
+                     <label><input type="checkbox" value="http-brute">http-brute (HTTP brute-force)</label><br>
+                     <label><input type="checkbox" value="smtp-brute">smtp-brute (SMTP brute-force)</label><br>
+                     <label><input type="checkbox" value="mysql-brute">mysql-brute (MySQL brute-force)</label><br>
+                </div>
+            
+                <div class="category-title category-title-info-gathering" onclick="toggleCategory('info-gathering')">Information Gathering:</div>
+                <div class="script-options" id="info-gathering" multiple>
+                    <label><input type="checkbox" value="discovery">Discover(ALL)</label><br>
+                    <label><input type="checkbox" value="whois-domain">whois-domain (Domain WHOIS)</label><br>
+                    <label><input type="checkbox" value="dns-brute">dns-brute (DNS subdomain brute-force)</label><br>
+                    <label><input type="checkbox" value="http-headers">http-headers (HTTP headers)</label><br>
+                    <label><input type="checkbox" value="http-methods">http-methods (HTTP methods)</label><br>
+                    <label><input type="checkbox" value="dns-srv-enum">dns-srv-enum (DNS SRV enumeration)</label><br>
+                    <label><input type="checkbox" value="http-enum">http-enum (Web app & directory enumeration)</label><br>
+                </div>
+            
+                <div class="category-title category-title-ssl-testing" onclick="toggleCategory('ssl-testing')">SSL and TLS Testing:</div>
+                <div class="script-options" id="ssl-testing" multiple>
+                    <label><input type="checkbox" value="ssl">SSL & TLS (ALL)</label><br>
+                    <label><input type="checkbox" value="ssl-cert">ssl-cert (SSL certificate info)</label><br>
+                    <label><input type="checkbox" value="ssl-enum-ciphers">ssl-enum-ciphers (SSL/TLS ciphers)</label><br>
+                    <label><input type="checkbox" value="ssl-poodle">ssl-poodle (SSL POODLE vulnerability)</label><br>
+                    <label><input type="checkbox" value="ssl-dh-params">ssl-dh-params (Weak DH params check)</label><br>
+                </div>
+            
+                <div class="category-title category-title-malware-detection" onclick="toggleCategory('malware-detection')">Malware and Backdoor Detection:</div>
+                <div class="script-options" id="malware-detection" multiple>
+                    <div>
+                        <input type="checkbox" id="malware-detection-all" onchange="toggleAllScripts('malware-detection', this.checked)"> Run All
+                    </div>
+                    <label><input type="checkbox" value="http-malware-host">http-malware-host (Malware host check)</label><br>
+                    <label><input type="checkbox" value="http-sql-injection">http-sql-injection (SQL injection)</label><br>
+                    <label><input type="checkbox" value="http-xssed">http-xssed (XSS vulnerability check)</label><br>
+                    <label><input type="checkbox" value="smb-vuln-cve-2017-7494">smb-vuln-cve-2017-7494 (Samba vuln)</label><br>
+                </div>
+                <input type="text" id="custom-script" placeholder="Enter custom script name">
             </div>
 
             <!-- Submit Button -->
@@ -109,36 +167,6 @@
         {% endif %}
     </section>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const scriptSelect = document.getElementById("script-select");
-            const customScriptInput = document.getElementById("custom-script-input");
-
-            scriptSelect.addEventListener("change", function () {
-                if (scriptSelect.value === "other") {
-                    customScriptInput.style.display = "block";
-                    scriptSelect.name = "";  // Hide name to prevent sending
-                } else {
-                    customScriptInput.style.display = "none";
-                    scriptSelect.name = "script";  // Restore default name
-                }
-            });
-        });
-
-        function toggleDetails(button) {
-            const details = button.nextElementSibling;
-            if (details.style.display === "none") {
-                details.style.display = "block";
-                button.textContent = "Hide Details";
-            } else {
-                details.style.display = "none";
-                button.textContent = "Show Details";
-            }
-        }
-
-        function toggleScanForm() {
-            document.getElementById("scan").classList.toggle("hidden");
-        }
-    </script>
+    <script src="static/script.js"></script>
 </body>
 </html>

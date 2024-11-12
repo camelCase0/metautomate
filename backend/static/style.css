@@ -21,8 +21,9 @@ h1 {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 #scan-results {
-    max-width: 90%; /* Increase width to occupy more of the screen */
+    max-width: 90%;
     margin: 20px auto;
     background: #ffffff;
     padding: 20px;
@@ -87,6 +88,97 @@ form button:hover {
     font-size: 14px;
 }
 
+/* Script Category Styles */
+.script-category {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.category-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    cursor: pointer;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-title::after {
+    content: '▼';
+    font-size: 12px;
+    transition: transform 0.2s;
+}
+
+.category-title.collapsed::after {
+    transform: rotate(-90deg);
+}
+
+.script-options {
+    display: none;
+    margin-top: 10px;
+}
+
+.script-options label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.script-options label input {
+    margin-right: 8px;
+    accent-color: #2a9d8f;
+}
+
+/* Badge for Selected Scripts */
+.badge-container {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.badge {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+/* Additional category colors for badges */
+.badge-category-service-enum { background-color: #00796b; }
+.badge-category-vuln-detection { background-color: #ef6c00; }
+.badge-category-brute-force { background-color: #8e24aa; }
+.badge-category-info-gathering { background-color: #558b2f; }
+.badge-category-ssl-testing { background-color: #1e88e5; }
+.badge-category-malware-detection { background-color: #d32f2f; }
+.badge-category-custom-script { background-color: #9e9e9e; }
+
+/* Category Title Colors */
+.category-title-service-enum { color: #00796b; }
+.category-title-vuln-detection { color: #ef6c00; }
+.category-title-brute-force { color: #8e24aa; }
+.category-title-info-gathering { color: #558b2f; }
+.category-title-ssl-testing { color: #1e88e5; }
+.category-title-malware-detection { color: #d32f2f; }
+
+/* Optional Hover Effect for Category Titles */
+.category-title:hover {
+    text-decoration: underline;
+}
+
 /* Scan Results Table */
 .scan-results-table {
     width: 100%;
@@ -102,32 +194,7 @@ form button:hover {
 .scan-results-table th, .scan-results-table td {
     padding: 12px;
     border: 1px solid #ddd;
-    text-align: left;
-}
-
-.scan-results-table thead {
-    background-color: #1abc9c;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.scan-results-table .open {
-    color: #27ae60;
-    font-weight: bold;
-}
-
-.scan-results-table .closed {
-    color: #e74c3c;
-    font-weight: bold;
-}
-
-/* Additional Info Box */
-.additional-info {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #e9f5f3;
-    border-left: 4px solid #2a9d8f;
-    border-radius: 5px;
+   
 }
 
 /* Button for Toggle Form */
@@ -151,48 +218,6 @@ form button:hover {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Script Output Styling */
-.script-output {
-    background-color: #f9f9f9;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    line-height: 1.6;
-    font-size: 14px;
-    color: #333;
-}
-
-.script-output .label {
-    font-weight: bold;
-    color: #2c3e50;
-    display: inline;
-}
-
-.script-output ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
-}
-
-.script-output ul.references {
-    padding-left: 15px;
-    margin-top: 8px;
-}
-
-.script-output li {
-    margin-bottom: 6px;
-}
-
-.script-output .reference-link {
-    color: #3498db;
-    text-decoration: none;
-}
-
-.script-output .reference-link:hover {
-    text-decoration: underline;
-}
-
-
 .toggle-button {
     background-color: #1abc9c;
     color: white;
@@ -208,14 +233,17 @@ form button:hover {
     background-color: #16a085;
 }
 
-.script-details {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    font-family: monospace;
-    white-space: pre-wrap;
-    line-height: 1.6;
+.script-output {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px; /* Add some space between items */
+}
+
+.script-output div {
+    display: flex;
+    align-items: center;
+}
+
+.script-output .toggle-button {
+    margin-left: 10px;
 }
