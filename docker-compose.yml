@@ -1,24 +1,38 @@
 version: '3.8'
-
 services:
-  metasploitable2:
-    image: tleemcjr/metasploitable2
-    container_name: metasploitable2
-    hostname: victim
+  fastapi:
+    build: ./backend
+    ports:
+      - "8000:8000"   # Exposes FastAPI on localhost:8000
     networks:
-      - pentest
-    tty: true
-    stdin_open: true
+      - pentest-net
+    environment:
+      - METASPLOIT_HOST=metasploit
+      - METASPLOIT_PORT=55553  # Metasploit RPC server port
+      - METASPLOIT_USER=msfuser
+      - METASPLOIT_PASS=msfpass
+    # depends_on:
+    #   - metasploit
 
-  kali:
-    build: .
-    container_name: kalibox
-    hostname: attacker
+  # metasploit:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.metasploit
+  #   networks:
+  #     - pentest-net
+  #   stdin_open: true
+  #   tty: true
+  #  # Open a shell for Metasploit commands
+  
+  victim:
+    image: tleemcjr/metasploitable2
     networks:
-      - pentest
-    tty: true
-    stdin_open: true
+      - pentest-net
+    hostname: victim                  # Set hostname to 'victim'
+    tty: true                         # Allocate a pseudo-TTY
+    stdin_open: true                  # Keep the container running for interaction
+    restart: always                   # Optional: Restart if stopped
 
 networks:
-  pentest:
+  pentest-net:
     driver: bridge

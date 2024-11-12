@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pentest Application</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+    <h1>Pentest Application</h1>
+
+    <!-- Toggle button for Scan Form -->
+    <button id="toggle-scan-form" onclick="toggleScanForm()">Show/Hide Network Scan</button>
+
+    <!-- Network Scan Form -->
+    <section id="scan" class="{% if scan_results %}hidden{% endif %}">
+        <h2>Network Scan</h2>
+        <form action="/scan" method="post">
+            <label for="ip_range">Target IP Range:</label>
+            <input type="text" name="ip_range" placeholder="Enter IP range (e.g., 192.168.0.0/24)" required>
+
+            <!-- Additional form options -->
+            <div class="form-section">
+                <h3>Scan Types</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="service_version" checked> Service Version Detection (-sV)</label>
+                    <label><input type="checkbox" name="os_detection" checked> OS Detection (-O)</label>
+                    <label><input type="checkbox" name="aggressive"> Aggressive Scan (-A)</label>
+                    <label><input type="checkbox" name="tcp_scan"> TCP Scan (-sT)</label>
+                    <label><input type="checkbox" name="udp_scan"> UDP Scan (-sU)</label>
+                    <label><input type="checkbox" name="ping_scan"> Ping Scan (-sn)</label>
+                    <label><input type="checkbox" name="fast_scan"> Fast Scan (-F)</label>
+                </div>
+                <h3>Port and Script Options</h3>
+                <label for="port_range">Port Range:</label>
+                <input type="text" name="port_range" placeholder="e.g., 1-1000">
+                
+                <label for="script">Nmap Script:</label>
+                <select name="script" id="script-select">
+                    <option value="">Select a script</option>
+                    <option value="http-title">http-title (Get web server title)</option>
+                    <option value="ftp-anon">ftp-anon (Check for anonymous FTP access)</option>
+                    <option value="ssh-hostkey">ssh-hostkey (Get SSH host key)</option>
+                    <option value="smb-os-discovery">smb-os-discovery (Discover OS info via SMB)</option>
+                    <option value="ssl-cert">ssl-cert (Retrieve SSL certificate info)</option>
+                    <option value="dns-brute">dns-brute (DNS subdomain brute-force)</option>
+                    <option value="mysql-info">mysql-info (Retrieve MySQL info)</option>
+                    <option value="other">Other (Specify custom script)</option>
+                </select>
+                <input type="text" id="custom-script-input" name="script" placeholder="Enter custom script name" style="display: none;">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Start Scan</button>
+        </form>
+    </section>
+
+    <!-- Display Scan Results -->
+    <section id="scan-results">
+        {% if scan_results %}
+        <h3>Scan Results:</h3>
+        <table class="scan-results-table">
+            <thead>
+                <tr>
+                    <th>IP Address</th>
+                    <th>Port</th>
+                    <th>Protocol</th>
+                    <th>Service</th>
+                    <th>Product</th>
+                    <th>Version</th>
+                    <th>State</th>
+                    <th>Script Output</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in scan_results %}
+                <tr>
+                    <td>{{ result.ip }}</td>
+                    <td>{{ result.port }}</td>
+                    <td>{{ result.protocol | upper }}</td>
+                    <td>{{ result.service | capitalize }}</td>
+                    <td>{{ result.product | capitalize }}</td>
+                    <td>{{ result.version }}</td>
+                    <td class="{{ 'open' if result.state == 'open' else 'closed' }}">{{ result.state | capitalize }}</td>
+                    <td>
+                        
+                        {% if result.script_output %}
+                        <div class="script-output">
+                            {% for script_name, script_details in result.script_output.items() %}
+                                <strong>{{ script_name }}:</strong>
+                                <button onclick="toggleDetails(this)" class="toggle-button">Show Details</button>
+                                <div class="script-details" style="display: none;">
+                                    <pre>{{ script_details }}</pre>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const scriptSelect = document.getElementById("script-select");
+            const customScriptInput = document.getElementById("custom-script-input");
+
+            scriptSelect.addEventListener("change", function () {
+                if (scriptSelect.value === "other") {
+                    customScriptInput.style.display = "block";
+                    scriptSelect.name = "";  // Hide name to prevent sending
+                } else {
+                    customScriptInput.style.display = "none";
+                    scriptSelect.name = "script";  // Restore default name
+                }
+            });
+        });
+
+        function toggleDetails(button) {
+            const details = button.nextElementSibling;
+            if (details.style.display === "none") {
+                details.style.display = "block";
+                button.textContent = "Hide Details";
+            } else {
+                details.style.display = "none";
+                button.textContent = "Show Details";
+            }
+        }
+
+        function toggleScanForm() {
+            document.getElementById("scan").classList.toggle("hidden");
+        }
+    </script>
+</body>
+</html>

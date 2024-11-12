@@ -1,0 +1,21 @@
+# Use a suitable base image
+FROM kalilinux/kali-rolling
+
+# Install dependencies and Metasploit
+RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg2 \
+    postgresql \
+    wget \
+    git \
+    libsqlite3-dev \
+    && curl https://raw.githubusercontent.com/rapid7/metasploit-framework/master/docker/Dockerfile | bash
+
+# Ensure msfconsole is accessible
+RUN ln -s /usr/local/bin/msfconsole /usr/bin/msfconsole
+
+# Expose the RPC server port
+EXPOSE 55553
+
+# Start Metasploit RPC server on container start
+ENTRYPOINT ["msfconsole", "-x", "load msgrpc ServerHost=0.0.0.0 ServerPort=55553 User=msfuser Pass=msfpass"]

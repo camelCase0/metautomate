@@ -1,0 +1,221 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #2a9d8f;
+    margin-top: 20px;
+}
+
+#scan {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#scan-results {
+    max-width: 90%; /* Increase width to occupy more of the screen */
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hide elements initially */
+.hidden {
+    display: none;
+}
+
+/* Form Styles */
+form label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+form input[type="text"], form input[type="number"], form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form button {
+    display: inline-block;
+    background-color: #2a9d8f;
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #21867a;
+}
+
+/* Form Section Styles */
+.form-section {
+    margin-bottom: 20px;
+}
+
+.form-section h3 {
+    font-size: 20px;
+    color: #34495e;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #e4e9eb;
+    padding-bottom: 5px;
+}
+
+.form-section .checkbox-group label {
+    display: inline-flex;
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+/* Scan Results Table */
+.scan-results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 15px;
+    background: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scan-results-table th, .scan-results-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.scan-results-table thead {
+    background-color: #1abc9c;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.scan-results-table .open {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.scan-results-table .closed {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Additional Info Box */
+.additional-info {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e9f5f3;
+    border-left: 4px solid #2a9d8f;
+    border-radius: 5px;
+}
+
+/* Button for Toggle Form */
+#toggle-scan-form {
+    display: inline-block;
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-weight: 500;
+    margin: 20px auto; /* Center the button */
+    display: block; /* Full-width button */
+}
+
+#toggle-scan-form:hover {
+    background-color: #2980b9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Script Output Styling */
+.script-output {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+    font-size: 14px;
+    color: #333;
+}
+
+.script-output .label {
+    font-weight: bold;
+    color: #2c3e50;
+    display: inline;
+}
+
+.script-output ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.script-output ul.references {
+    padding-left: 15px;
+    margin-top: 8px;
+}
+
+.script-output li {
+    margin-bottom: 6px;
+}
+
+.script-output .reference-link {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.script-output .reference-link:hover {
+    text-decoration: underline;
+}
+
+
+.toggle-button {
+    background-color: #1abc9c;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.toggle-button:hover {
+    background-color: #16a085;
+}
+
+.script-details {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: monospace;
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
