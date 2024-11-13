@@ -1,26 +1,13 @@
-// document.addEventListener("DOMContentLoaded", function () {
-        //     const scriptSelect = document.getElementById("script-select");
-        //     const customScriptInput = document.getElementById("custom-script-input");
-
-        //     scriptSelect.addEventListener("change", function () {
-        //         if (scriptSelect.value === "other") {
-        //             customScriptInput.style.display = "block";
-        //             scriptSelect.name = "";  // Hide name to prevent sending
-        //         } else {
-        //             customScriptInput.style.display = "none";
-        //             scriptSelect.name = "script";  // Restore default name
-        //         }
-        //     });
-        // });
-
-        function toggleDetails(button) {
-            const details = button.nextElementSibling;
-            if (details.style.display === "none") {
-                details.style.display = "block";
-                button.textContent = "Hide Details";
+        function toggleCardDetails(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('span');
+            
+            if (content.style.display === "none" || !content.style.display) {
+                content.style.display = "block";
+                arrow.textContent = "▲";
             } else {
-                details.style.display = "none";
-                button.textContent = "Show Details";
+                content.style.display = "none";
+                arrow.textContent = "▼";
             }
         }
 

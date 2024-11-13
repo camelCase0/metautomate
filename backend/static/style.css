@@ -247,3 +247,71 @@ form button:hover {
 .script-output .toggle-button {
     margin-left: 10px;
 }
+
+.vulnerability-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card {
+    background-color: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 10px;
+    background-color: #e0f7fa;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.card-content {
+    padding: 10px;
+    display: none;
+    background-color: #f9f9f9;
+    font-family: monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
+    border-top: 1px solid #ddd;
+}
+
+/* INFO - Neutral, light gray */
+.INFO {
+    background-color: #e8f4fa;
+    border: 1px solid #b0d4e3;
+    color: #0c5460;
+}
+
+/* LOW - Green for low risk */
+.LOW {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+/* MEDIUM - Yellow for moderate risk */
+.MEDIUM {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+/* HIGH - Orange for high risk */
+.HIGH {
+    background-color: #fce8b2;
+    border: 1px solid #f5c06d;
+    color: #7a4501;
+}
+
+/* CRITICAL - Red for severe risk */
+.CRITICAL {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+

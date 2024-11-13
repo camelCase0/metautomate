@@ -45,69 +45,209 @@
                 <div id="selected-scripts" class="badge-container"></div>
                 
                 <div class="category-title category-title-service-enum" onclick="toggleCategory('service-enum')">Service Enumeration:</div>
-                <div class="script-options" id="service-enum" multiple>
-                    <label><input type="checkbox" value="default,safe">run service enumeration scripts(ALL)</label><br>
-                    <label><input type="checkbox" value="http-title">http-title (Webpage title)</label><br>
-                    <label><input type="checkbox" value="ssh-hostkey">ssh-hostkey (SSH host key fingerprint)</label><br>
-                    <label><input type="checkbox" value="ftp-anon">ftp-anon (Anonymous FTP login)</label><br>
-                    <label><input type="checkbox" value="smtp-commands">smtp-commands (Supported SMTP commands)</label><br>
-                    <label><input type="checkbox" value="mysql-info">mysql-info (MySQL server info)</label><br>
-                    <label><input type="checkbox" value="pop3-capabilities">pop3-capabilities (POP3 server capabilities)</label><br>
-                    <label><input type="checkbox" value="imap-capabilities">imap-capabilities (IMAP server capabilities)</label><br>
-                    <label><input type="checkbox" value="smb-os-discovery">smb-os-discovery (SMB OS discovery)</label><br>
+                <div class="script-options" id="service-enum">
+                    <label><input type="checkbox" id="malware-detection-all" onchange="toggleAllScripts('service-enum', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="default">default</label>
+                    <label><input type="checkbox" value="safe">safe</label>
+                    <label><input type="checkbox" value="banner">banner</label>
+                    <label><input type="checkbox" value="http-title">http-title</label>
+                    <label><input type="checkbox" value="ssh-hostkey">ssh-hostkey</label>
+                    <label><input type="checkbox" value="ftp-anon">ftp-anon</label>
+                    <label><input type="checkbox" value="smtp-commands">smtp-commands</label>
+                    <label><input type="checkbox" value="mysql-info">mysql-info</label>
+                    <label><input type="checkbox" value="pop3-capabilities">pop3-capabilities</label>
+                    <label><input type="checkbox" value="imap-capabilities">imap-capabilities</label>
+                    <label><input type="checkbox" value="smb-os-discovery">smb-os-discovery</label>
+                    <label><input type="checkbox" value="snmp-info">snmp-info</label>
+                    <label><input type="checkbox" value="dns-service-discovery">dns-service-discovery</label>
+                    <label><input type="checkbox" value="nbstat">nbstat</label>
+                    <label><input type="checkbox" value="rdp-enum-encryption">rdp-enum-encryption</label>
+                    <label><input type="checkbox" value="smb-enum-shares">smb-enum-shares</label>
+                    <label><input type="checkbox" value="smb-enum-users">smb-enum-users</label>
+                    <label><input type="checkbox" value="smtp-enum-users">smtp-enum-users</label>
+                    <label><input type="checkbox" value="imap-ntlm-info">imap-ntlm-info</label>
+                    <label><input type="checkbox" value="smtp-capabilities">smtp-capabilities</label>
+                    <label><input type="checkbox" value="rpc-grind">rpc-grind</label>
+                    <label><input type="checkbox" value="http-methods">http-methods</label>
+                    <label><input type="checkbox" value="http-server-header">http-server-header</label>
                 </div>
             
                 <div class="category-title category-title-vuln-detection" onclick="toggleCategory('vuln-detection')">Vulnerability Detection:</div>
-                <div class="script-options" id="vuln-detection" multiple>
-                    <label><input type="checkbox" value="vuln">Vulnerability Detection Scripts(ALL)</label><br>
-                    <label><input type="checkbox" value="ssl-heartbleed">ssl-heartbleed (Heartbleed check)</label><br>
-                    <label><input type="checkbox" value="http-shellshock">http-shellshock (Shellshock vulnerability)</label><br>
-                    <label><input type="checkbox" value="ftp-vsftpd-backdoor">ftp-vsftpd-backdoor (vsftpd backdoor)</label><br>
-                    <label><input type="checkbox" value="smb-vuln-ms17-010">smb-vuln-ms17-010 (EternalBlue)</label><br>
-                    <label><input type="checkbox" value="http-cve2017-5638">http-cve2017-5638 (Apache Struts CVE)</label><br>
-                    <label><input type="checkbox" value="smtp-vuln-cve2011-1720">smtp-vuln-cve2011-1720 (Postfix vuln)</label><br>
+                <div class="script-options" id="vuln-detection">
+                    <label><input type="checkbox" id="malware-detection-all" onchange="toggleAllScripts('vuln-detection', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="vuln">vuln</label>
+                    <label><input type="checkbox" value="ssl-heartbleed">ssl-heartbleed</label>
+                    <label><input type="checkbox" value="http-shellshock">http-shellshock</label>
+                    <label><input type="checkbox" value="ftp-vsftpd-backdoor">ftp-vsftpd-backdoor</label>
+                    <label><input type="checkbox" value="smb-vuln-ms17-010">smb-vuln-ms17-010</label>
+                    <label><input type="checkbox" value="http-cve2017-5638">http-cve2017-5638</label>
+                    <label><input type="checkbox" value="smtp-vuln-cve2011-1720">smtp-vuln-cve2011-1720</label>
+                    <label><input type="checkbox" value="mysql-vuln-cve2012-2122">mysql-vuln-cve2012-2122</label>
+                    <label><input type="checkbox" value="http-vuln-cve2017-5638">http-vuln-cve2017-5638</label>
+                    <label><input type="checkbox" value="http-vuln-cve2015-1427">http-vuln-cve2015-1427</label>
+                    <label><input type="checkbox" value="ssl-poodle">ssl-poodle</label>
+                    <label><input type="checkbox" value="ssl-dh-params">ssl-dh-params</label>
+                    <label><input type="checkbox" value="smb-vuln-cve-2017-7494">smb-vuln-cve-2017-7494</label>
+                    <label><input type="checkbox" value="sip-vuln-cve2011-2536">sip-vuln-cve2011-2536</label>
+                    <label><input type="checkbox" value="smb-vuln-cve-2012-1182">smb-vuln-cve-2012-1182</label>
                 </div>
             
                 <div class="category-title category-title-brute-force" onclick="toggleCategory('brute-force')">Brute-Force and Login Testing:</div>
-                <div class="script-options" id="brute-force" multiple>
-                     <label><input type="checkbox" value="brute, auth">Brute and login(ALL)</label><br>
-                     <label><input type="checkbox" value="ftp-brute">ftp-brute (FTP brute-force)</label><br>
-                     <label><input type="checkbox" value="ssh-brute">ssh-brute (SSH brute-force)</label><br>
-                     <label><input type="checkbox" value="http-brute">http-brute (HTTP brute-force)</label><br>
-                     <label><input type="checkbox" value="smtp-brute">smtp-brute (SMTP brute-force)</label><br>
-                     <label><input type="checkbox" value="mysql-brute">mysql-brute (MySQL brute-force)</label><br>
+                <div class="script-options" id="brute-force">
+                    <label><input type="checkbox" id="malware-detection-all" onchange="toggleAllScripts('brute-force', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="brute">brute</label>
+                    <label><input type="checkbox" value="auth">auth</label>
+                    <label><input type="checkbox" value="ftp-brute">ftp-brute</label>
+                    <label><input type="checkbox" value="ssh-brute">ssh-brute</label>
+                    <label><input type="checkbox" value="http-brute">http-brute</label>
+                    <label><input type="checkbox" value="smtp-brute">smtp-brute</label>
+                    <label><input type="checkbox" value="mysql-brute">mysql-brute</label>
+                    <label><input type="checkbox" value="pop3-brute">pop3-brute</label>
+                    <label><input type="checkbox" value="telnet-brute">telnet-brute</label>
+                    <label><input type="checkbox" value="oracle-brute">oracle-brute</label>
+                    <label><input type="checkbox" value="rdp-brute">rdp-brute</label>
+                    <label><input type="checkbox" value="mongodb-brute">mongodb-brute</label>
+                    <label><input type="checkbox" value="redis-brute">redis-brute</label>
+                    <label><input type="checkbox" value="nntp-brute">nntp-brute</label>
+                    <label><input type="checkbox" value="sip-brute">sip-brute</label>
+                    <label><input type="checkbox" value="snmp-brute">snmp-brute</label>
                 </div>
             
                 <div class="category-title category-title-info-gathering" onclick="toggleCategory('info-gathering')">Information Gathering:</div>
-                <div class="script-options" id="info-gathering" multiple>
-                    <label><input type="checkbox" value="discovery">Discover(ALL)</label><br>
-                    <label><input type="checkbox" value="whois-domain">whois-domain (Domain WHOIS)</label><br>
-                    <label><input type="checkbox" value="dns-brute">dns-brute (DNS subdomain brute-force)</label><br>
-                    <label><input type="checkbox" value="http-headers">http-headers (HTTP headers)</label><br>
-                    <label><input type="checkbox" value="http-methods">http-methods (HTTP methods)</label><br>
-                    <label><input type="checkbox" value="dns-srv-enum">dns-srv-enum (DNS SRV enumeration)</label><br>
-                    <label><input type="checkbox" value="http-enum">http-enum (Web app & directory enumeration)</label><br>
+                <div class="script-options" id="info-gathering">
+                    <label><input type="checkbox" id="malware-detection-all" onchange="toggleAllScripts('info-gathering', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="discovery">discovery</label>
+                    <label><input type="checkbox" value="whois-domain">whois-domain</label>
+                    <label><input type="checkbox" value="dns-brute">dns-brute</label>
+                    <label><input type="checkbox" value="dns-srv-enum">dns-srv-enum</label>
+                    <label><input type="checkbox" value="http-headers">http-headers</label>
+                    <label><input type="checkbox" value="http-title">http-title</label>
+                    <label><input type="checkbox" value="http-methods">http-methods</label>
+                    <label><input type="checkbox" value="http-enum">http-enum</label>
+                    <label><input type="checkbox" value="dns-zone-transfer">dns-zone-transfer</label>
+                    <label><input type="checkbox" value="asn-query">asn-query</label>
+                    <label><input type="checkbox" value="targets-ipv6-multicast-mld">targets-ipv6-multicast-mld</label>
+                    <label><input type="checkbox" value="targets-ipv6-multicast-slaac">targets-ipv6-multicast-slaac</label>
+                    <label><input type="checkbox" value="targets-sniffer">targets-sniffer</label>
+                    <label><input type="checkbox" value="ntp-info">ntp-info</label>
+                    <label><input type="checkbox" value="whois">whois</label>
+                    <label><input type="checkbox" value="smtp-strangeport">smtp-strangeport</label>
+                    <label><input type="checkbox" value="ip-geolocation-ipinfodb">ip-geolocation-ipinfodb</label>
                 </div>
             
                 <div class="category-title category-title-ssl-testing" onclick="toggleCategory('ssl-testing')">SSL and TLS Testing:</div>
-                <div class="script-options" id="ssl-testing" multiple>
-                    <label><input type="checkbox" value="ssl">SSL & TLS (ALL)</label><br>
-                    <label><input type="checkbox" value="ssl-cert">ssl-cert (SSL certificate info)</label><br>
-                    <label><input type="checkbox" value="ssl-enum-ciphers">ssl-enum-ciphers (SSL/TLS ciphers)</label><br>
-                    <label><input type="checkbox" value="ssl-poodle">ssl-poodle (SSL POODLE vulnerability)</label><br>
-                    <label><input type="checkbox" value="ssl-dh-params">ssl-dh-params (Weak DH params check)</label><br>
+                <div class="script-options" id="ssl-tls-testing">
+                    <label><input type="checkbox" id="malware-detection-all" onchange="toggleAllScripts('ssl-testing', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="ssl">ssl</label>
+                    <label><input type="checkbox" value="ssl-cert">ssl-cert</label>
+                    <label><input type="checkbox" value="ssl-enum-ciphers">ssl-enum-ciphers</label>
+                    <label><input type="checkbox" value="ssl-poodle">ssl-poodle</label>
+                    <label><input type="checkbox" value="ssl-heartbleed">ssl-heartbleed</label>
+                    <label><input type="checkbox" value="ssl-known-key">ssl-known-key</label>
+                    <label><input type="checkbox" value="ssl-dh-params">ssl-dh-params</label>
+                    <label><input type="checkbox" value="ssl-date">ssl-date</label>
+                    <label><input type="checkbox" value="ssl-google-cert-catalog">ssl-google-cert-catalog</label>
+                    <label><input type="checkbox" value="ssl-v2">ssl-v2</label>
+                    <label><input type="checkbox" value="tls-ticketbleed">tls-ticketbleed</label>
                 </div>
             
                 <div class="category-title category-title-malware-detection" onclick="toggleCategory('malware-detection')">Malware and Backdoor Detection:</div>
-                <div class="script-options" id="malware-detection" multiple>
-                    <div>
-                        <input type="checkbox" id="malware-detection-all" onchange="toggleAllScripts('malware-detection', this.checked)"> Run All
-                    </div>
-                    <label><input type="checkbox" value="http-malware-host">http-malware-host (Malware host check)</label><br>
-                    <label><input type="checkbox" value="http-sql-injection">http-sql-injection (SQL injection)</label><br>
-                    <label><input type="checkbox" value="http-xssed">http-xssed (XSS vulnerability check)</label><br>
-                    <label><input type="checkbox" value="smb-vuln-cve-2017-7494">smb-vuln-cve-2017-7494 (Samba vuln)</label><br>
+                <div class="script-options" id="malware-detection">
+                    <label><input type="checkbox" id="malware-detection-all" onchange="toggleAllScripts('malware-detection', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="http-malware-host">http-malware-host</label>
+                    <label><input type="checkbox" value="http-sql-injection">http-sql-injection</label>
+                    <label><input type="checkbox" value="http-xssed">http-xssed</label>
+                    <label><input type="checkbox" value="ftp-vsftpd-backdoor">ftp-vsftpd-backdoor</label>
+                    <label><input type="checkbox" value="http-vuln-cve2017-5638">http-vuln-cve2017-5638</label>
+                    <label><input type="checkbox" value="http-backdoor">http-backdoor</label>
+                    <label><input type="checkbox" value="ftp-proftpd-backdoor">ftp-proftpd-backdoor</label>
+                    <label><input type="checkbox" value="http-huawei-hg5xx-vuln">http-huawei-hg5xx-vuln</label>
+                    <label><input type="checkbox" value="http-majordomo2-dir-traversal">http-majordomo2-dir-traversal</label>
                 </div>
+
+                <div class="category-title category-title-database-enum" onclick="toggleCategory('database-enum')">
+                    Database Enumeration and Vulnerability Detection:
+                </div>
+                <div class="script-options" id="database-enum">
+                    <label><input type="checkbox" id="database-enum-all" onchange="toggleAllScripts('database-enum', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="mysql-enum">mysql-enum</label>
+                    <label><input type="checkbox" value="mysql-info">mysql-info</label>
+                    <label><input type="checkbox" value="mysql-query">mysql-query</label>
+                    <label><input type="checkbox" value="mysql-users">mysql-users</label>
+                    <label><input type="checkbox" value="mongodb-info">mongodb-info</label>
+                    <label><input type="checkbox" value="redis-info">redis-info</label>
+                    <label><input type="checkbox" value="oracle-enum-users">oracle-enum-users</label>
+                    <label><input type="checkbox" value="mysql-dump-hashes">mysql-dump-hashes</label>
+                    <label><input type="checkbox" value="drda-info">drda-info</label>
+                    <label><input type="checkbox" value="mongodb-databases">mongodb-databases</label>
+                </div>
+                
+                <div class="category-title category-title-file-sharing-smb" onclick="toggleCategory('file-sharing-smb')">
+                    File Sharing and SMB:
+                </div>
+                <div class="script-options" id="file-sharing-smb">
+                    <label><input type="checkbox" id="file-sharing-smb-all" onchange="toggleAllScripts('file-sharing-smb', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="smb-brute">smb-brute</label>
+                    <label><input type="checkbox" value="smb-enum-shares">smb-enum-shares</label>
+                    <label><input type="checkbox" value="smb-enum-users">smb-enum-users</label>
+                    <label><input type="checkbox" value="smb-vuln-cve-2017-7494">smb-vuln-cve-2017-7494</label>
+                    <label><input type="checkbox" value="smb-os-discovery">smb-os-discovery</label>
+                    <label><input type="checkbox" value="smb-vuln-ms17-010">smb-vuln-ms17-010</label>
+                    <label><input type="checkbox" value="nfs-ls">nfs-ls</label>
+                    <label><input type="checkbox" value="nfs-showmount">nfs-showmount</label>
+                </div>
+
+                                
+                <div class="category-title category-title-email-services" onclick="toggleCategory('email-services')">
+                    Email Services (SMTP, POP3, IMAP):
+                </div>
+                <div class="script-options" id="email-services">
+                    <label><input type="checkbox" id="email-services-all" onchange="toggleAllScripts('email-services', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="smtp-brute">smtp-brute</label>
+                    <label><input type="checkbox" value="smtp-enum-users">smtp-enum-users</label>
+                    <label><input type="checkbox" value="smtp-open-relay">smtp-open-relay</label>
+                    <label><input type="checkbox" value="smtp-vuln-cve2010-4344">smtp-vuln-cve2010-4344</label>
+                    <label><input type="checkbox" value="smtp-vuln-cve2011-1720">smtp-vuln-cve2011-1720</label>
+                    <label><input type="checkbox" value="pop3-brute">pop3-brute</label>
+                    <label><input type="checkbox" value="pop3-capabilities">pop3-capabilities</label>
+                    <label><input type="checkbox" value="imap-capabilities">imap-capabilities</label>
+                </div>
+
+                <div class="category-title category-title-ftp" onclick="toggleCategory('ftp')">
+                    FTP:
+                </div>
+                <div class="script-options" id="ftp">
+                    <label><input type="checkbox" id="ftp-all" onchange="toggleAllScripts('ftp', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="ftp-brute">ftp-brute</label>
+                    <label><input type="checkbox" value="ftp-anon">ftp-anon</label>
+                    <label><input type="checkbox" value="ftp-proftpd-backdoor">ftp-proftpd-backdoor</label>
+                    <label><input type="checkbox" value="ftp-vsftpd-backdoor">ftp-vsftpd-backdoor</label>
+                    <label><input type="checkbox" value="ftp-vuln-cve2010-4221">ftp-vuln-cve2010-4221</label>
+                </div>
+
+                <div class="category-title category-title-web-apps" onclick="toggleCategory('web-apps')">
+                    Web Applications and HTTP Testing:
+                </div>
+                <div class="script-options" id="web-apps">
+                    <label><input type="checkbox" id="web-apps-all" onchange="toggleAllScripts('web-apps', this.checked)"> Run All</label>
+                    <label><input type="checkbox" value="http-brute">http-brute</label>
+                    <label><input type="checkbox" value="http-methods">http-methods</label>
+                    <label><input type="checkbox" value="http-title">http-title</label>
+                    <label><input type="checkbox" value="http-cors">http-cors</label>
+                    <label><input type="checkbox" value="http-headers">http-headers</label>
+                    <label><input type="checkbox" value="http-enum">http-enum</label>
+                    <label><input type="checkbox" value="http-sql-injection">http-sql-injection</label>
+                    <label><input type="checkbox" value="http-xssed">http-xssed</label>
+                    <label><input type="checkbox" value="http-backdoor">http-backdoor</label>
+                    <label><input type="checkbox" value="http-iis-short-name-brute">http-iis-short-name-brute</label>
+                    <label><input type="checkbox" value="http-auth">http-auth</label>
+                    <label><input type="checkbox" value="http-form-brute">http-form-brute</label>
+                    <label><input type="checkbox" value="http-errors">http-errors</label>
+                    <label><input type="checkbox" value="http-cookie-flags">http-cookie-flags</label>
+                    <label><input type="checkbox" value="http-robots.txt">http-robots.txt</label>
+                </div>
+
+
                 <input type="text" id="custom-script" placeholder="Enter custom script name">
             </div>
 
@@ -117,55 +257,57 @@
     </section>
 
     <!-- Display Scan Results -->
-    <section id="scan-results">
-        {% if scan_results %}
-        <h3>Scan Results:</h3>
-        <table class="scan-results-table">
-            <thead>
-                <tr>
-                    <th>IP Address</th>
-                    <th>Port</th>
-                    <th>Protocol</th>
-                    <th>Service</th>
-                    <th>Product</th>
-                    <th>Version</th>
-                    <th>State</th>
-                    <th>Script Output</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for result in scan_results %}
-                <tr>
-                    <td>{{ result.ip }}</td>
-                    <td>{{ result.port }}</td>
-                    <td>{{ result.protocol | upper }}</td>
-                    <td>{{ result.service | capitalize }}</td>
-                    <td>{{ result.product | capitalize }}</td>
-                    <td>{{ result.version }}</td>
-                    <td class="{{ 'open' if result.state == 'open' else 'closed' }}">{{ result.state | capitalize }}</td>
-                    <td>
-                        
+<section id="scan-results">
+    {% if scan_results %}
+    <h3>Scan Results:</h3>
+    <table class="scan-results-table">
+        <thead>
+            <tr>
+                <th>IP Address</th>
+                <th>Port</th>
+                <th>Protocol</th>
+                <th>Service</th>
+                <th>Product</th>
+                <th>Version</th>
+                <th>State</th>
+                <th>Script Output</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in scan_results %}
+            <tr>
+                <td>{{ result.ip }}</td>
+                <td>{{ result.port }}</td>
+                <td>{{ result.protocol | upper }}</td>
+                <td>{{ result.service | capitalize }}</td>
+                <td>{{ result.product | capitalize }}</td>
+                <td>{{ result.version }}</td>
+                <td class="{{ 'open' if result.state == 'open' else 'closed' }}">{{ result.state | capitalize }}</td>
+                <td>
+                    <div class="vulnerability-cards">
                         {% if result.script_output %}
-                        <div class="script-output">
                             {% for script_name, script_details in result.script_output.items() %}
-                                <strong>{{ script_name }}:</strong>
-                                <button onclick="toggleDetails(this)" class="toggle-button">Show Details</button>
-                                <div class="script-details" style="display: none;">
-                                    <pre>{{ script_details }}</pre>
+                                <div class="card ">
+                                    <div class="card-header {{ script_details.risk }}" onclick="toggleCardDetails(this)">
+                                        <strong>{{ script_name }}</strong>
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="card-content" style="display: none;">
+                                        <pre>{{ script_details.output }}</pre>
+                                    </div>
                                 </div>
                             {% endfor %}
-                        </div>
                         {% else %}
-                            N/A
+                            <span>N/A</span>
                         {% endif %}
-                        
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
-    </section>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</section>
 
     <script src="static/script.js"></script>
 </body>
