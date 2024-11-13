@@ -315,3 +315,74 @@ form button:hover {
     color: #721c24;
 }
 
+/* Spinner Styles */
+.spinner-container {
+    width: 300px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #252525;
+    transition: transform 0.3s ease;
+}
+
+.icon.active {
+    transform: scale(1.2);
+}
+.globe.active {
+    background-color: #0c5460;
+}
+.magnify.active {
+    background-color: #0c5460;
+}
+.shield.active {
+    background-color: #0c5460;
+}
+
+.icon svg {
+    width: 40px;
+    height: 40px;
+    fill: #999;
+}
+
+.icon.active svg {
+    fill: #121212;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(to right, #00ff00, #004400);
+    width: 0;
+    transition: width 0.5s linear;
+}
+
+.status {
+    font-size: 16px;
+    color: #ccc;
+}

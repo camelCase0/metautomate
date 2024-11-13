@@ -66,9 +66,9 @@
 
         document.getElementById("custom-script").addEventListener("input", updateSelectedScripts);
 
-
         // Prepare scripts before form submission
         function prepareScripts() {
+            runSpinner()
             const form = document.querySelector("form");
             document.querySelectorAll("input[name='script']").forEach(input => input.remove());
 
@@ -98,3 +98,40 @@
                 category.style.display = "none";
             }
         }
+
+
+    const icons = document.querySelectorAll('.icon');
+    const progressBar = document.getElementById('progress-bar-inner');
+    const statuss = document.getElementById('status');
+    const spinner = document.getElementById('spinner');
+
+    const phases = [
+        { icon: 'globe', text: 'Scanning network...' },
+        { icon: 'magnify', text: 'Identifying vulnerabilities...' },
+        { icon: 'shield', text: 'Securing assets...' }
+    ];
+
+    let currentPhase = 0;
+
+    function updatePhase() {
+        // Reset all icons to inactive
+        icons.forEach(icon => icon.classList.remove('active'));
+
+        // Activate the current icon
+        const activeIcon = document.querySelector(`.${phases[currentPhase].icon}`);
+        activeIcon.classList.add('active');
+
+        // Update status text
+        statuss.textContent = phases[currentPhase].text;
+
+        // Update progress bar
+        progressBar.style.width = `${((currentPhase + 1) / phases.length) * 100}%`;
+
+        // Move to the next phase after a delay
+        currentPhase = (currentPhase + 1) % phases.length; // Loop back to the beginning
+        setTimeout(updatePhase, 1500); // Adjust delay as needed
+    }
+    function runSpinner(){
+        spinner.style.display = 'block';
+        updatePhase();
+    }
