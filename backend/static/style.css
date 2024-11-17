@@ -347,13 +347,13 @@ form button:hover {
     transform: scale(1.2);
 }
 .globe.active {
-    background-color: #0c5460;
+    background-color: #31b1b1;
 }
 .magnify.active {
-    background-color: #0c5460;
+    background-color: #35ce9b;
 }
 .shield.active {
-    background-color: #0c5460;
+    background-color: #dad733;
 }
 
 .icon svg {

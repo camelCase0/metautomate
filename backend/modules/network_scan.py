@@ -1,22 +1,3 @@
-# import nmap
-
-# def scan_network(ip_range):
-#     nm = nmap.PortScanner()
-#     nm.scan(ip_range, arguments='-sV -p 21')  # -sV for service version detection
-#     scan_results = []
-
-#     for host in nm.all_hosts():
-#         for proto in nm[host].all_protocols():
-#             for port in nm[host][proto].keys():
-#                 service = nm[host][proto][port]['name']
-#                 scan_results.append({
-#                     "ip": host,
-#                     "port": port,
-#                     "service": service
-#                 })
-    
-#     return scan_results
-
 import nmap
 
 SCRIPT_RISK_LEVELS = {
@@ -102,6 +83,7 @@ SCRIPT_RISK_LEVELS = {
         "http-malware-host"
     ],
     "CRITICAL": [
+        "vulners",
         "ftp-vsftpd-backdoor",
         "ssl-heartbleed",
         "http-shellshock",
