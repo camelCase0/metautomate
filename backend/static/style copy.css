@@ -1,0 +1,392 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #2a9d8f;
+    margin-top: 20px;
+}
+
+#scan {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#scan-results {
+    max-width: 90%; /* Increase width to occupy more of the screen */
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hide elements initially */
+.hidden {
+    display: none;
+}
+
+/* Form Styles */
+form label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+form input[type="text"], form input[type="number"], form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form button {
+    display: inline-block;
+    background-color: #2a9d8f;
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #21867a;
+}
+
+/* Form Section Styles */
+.form-section {
+    margin-bottom: 20px;
+}
+
+.form-section h3 {
+    font-size: 20px;
+    color: #34495e;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #e4e9eb;
+    padding-bottom: 5px;
+}
+
+.form-section .checkbox-group label {
+    display: inline-flex;
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+/* Script Category Styles */
+.script-category {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.category-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    cursor: pointer;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-title::after {
+    content: '▼';
+    font-size: 12px;
+    transition: transform 0.2s;
+}
+
+.category-title.collapsed::after {
+    transform: rotate(-90deg);
+}
+
+.script-options {
+    display: none;
+    margin-top: 10px;
+}
+
+.script-options label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.script-options label input {
+    margin-right: 8px;
+    accent-color: #2a9d8f;
+}
+
+/* Badge for Selected Scripts */
+.badge-container {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.badge {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+/* Scan Results Table */
+.scan-results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 15px;
+    background: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scan-results-table th, .scan-results-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.scan-results-table thead {
+    background-color: #1abc9c;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.scan-results-table .open {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.scan-results-table .closed {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Additional Info Box */
+.additional-info {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e9f5f3;
+    border-left: 4px solid #2a9d8f;
+    border-radius: 5px;
+}
+
+/* Button for Toggle Form */
+#toggle-scan-form {
+    display: inline-block;
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-weight: 500;
+    margin: 20px auto; /* Center the button */
+    display: block; /* Full-width button */
+}
+
+#toggle-scan-form:hover {
+    background-color: #2980b9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Script Output Styling */
+.script-output {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+    font-size: 14px;
+    color: #333;
+}
+
+.script-output .label {
+    font-weight: bold;
+    color: #2c3e50;
+    display: inline;
+}
+
+.script-output ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.script-output ul.references {
+    padding-left: 15px;
+    margin-top: 8px;
+}
+
+.script-output li {
+    margin-bottom: 6px;
+}
+
+.script-output .reference-link {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.script-output .reference-link:hover {
+    text-decoration: underline;
+}
+
+.toggle-button {
+    background-color: #1abc9c;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.toggle-button:hover {
+    background-color: #16a085;
+}
+
+.script-details {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: monospace;
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+/* Styles for Script Categories */
+/* Style for category container */
+.script-category {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s;
+}
+
+/* Category title styling with color-coding and hover effects */
+.category-title {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    color: #2c3e50;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: 5px;
+}
+
+/* Specific colors for each category label */
+#service-enum .category-title { background-color: #e0f7fa; color: #00796b; }
+#vuln-detection .category-title { background-color: #ffe0b2; color: #ef6c00; }
+#brute-force .category-title { background-color: #f3e5f5; color: #8e24aa; }
+#info-gathering .category-title { background-color: #dcedc8; color: #558b2f; }
+#ssl-testing .category-title { background-color: #bbdefb; color: #1e88e5; }
+#malware-detection .category-title { background-color: #ffcdd2; color: #d32f2f; }
+
+/* Rotate arrow on hover */
+.category-title:hover::after {
+    transform: rotate(90deg);
+}
+
+.category-title::after {
+    content: '▼';
+    font-size: 14px;
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+/* Spacing and padding between checkboxes */
+.script-options label {
+    margin-bottom: 8px;
+    display: block;
+    padding-left: 5px;
+    font-size: 15px;
+    color: #555;
+}
+
+/* Better visibility and padding for badge container */
+.badge-container {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Badge styles with more padding and rounded corners */
+.badge {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+}
+.badge-category-service-enum { background-color: #00796b; }
+.badge-category-vuln-detection { background-color: #ef6c00; }
+.badge-category-brute-force { background-color: #8e24aa; }
+.badge-category-info-gathering { background-color: #558b2f; }
+.badge-category-ssl-testing { background-color: #1e88e5; }
+.badge-category-malware-detection { background-color: #d32f2f; }
+
+/* Hover effect for checkboxes to highlight selections */
+.script-options input[type="checkbox"]:hover + label {
+    background-color: #e0e0e0;
+    border-radius: 3px;
+}
+
+/* Adjust input for custom script with padding */
+#custom-script {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+
