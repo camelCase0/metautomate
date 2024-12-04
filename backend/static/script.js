@@ -67,7 +67,8 @@
         document.getElementById("custom-script").addEventListener("input", updateSelectedScripts);
 
         // Prepare scripts before form submission
-        function prepareScripts() {
+        async function prepareScripts(event) {
+            event.preventDefault();
             runSpinner()
             const form = document.querySelector("form");
             document.querySelectorAll("input[name='script']").forEach(input => input.remove());
@@ -83,11 +84,33 @@
                 scripts.forEach(script => {selectedScripts.push(script.trim())});
             }
             
-            const input = document.createElement("input");
-            input.type = "hidden";
-            input.name = "script";
-            input.value = selectedScripts.join(',');
-            form.appendChild(input);
+            const formData = new FormData(form);
+            formData.set("script", selectedScripts.join(","));
+
+            try {
+                // Submit the form using Fetch API
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                });
+        
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.statusText}`);
+                }
+        
+                const result = await response.json();
+                if (result.scan_id) {
+                    // Redirect to the results page using the scan_id
+                    window.location.href = `/view-scan/${result.scan_id}`;
+                } else {
+                    throw new Error("Scan ID not returned.");
+                }
+            } catch (error) {
+                console.error("Scan submission failed:", error);
+                alert("Failed to start scan. Please try again.");
+                spinner.style.display = "none"; // Hide spinner if there's an error
+                spinner_overlay.style.display = "none";
+            }
         }
 
         function toggleCategory(categoryId) {
@@ -104,6 +127,7 @@
     const progressBar = document.getElementById('progress-bar-inner');
     const statuss = document.getElementById('status');
     const spinner = document.getElementById('spinner');
+    const spinner_overlay = document.getElementById("spinner-overlay")
 
     const phases = [
         { icon: 'globe', text: 'Scanning network...' },
@@ -133,5 +157,29 @@
     }
     function runSpinner(){
         spinner.style.display = 'block';
+        spinner_overlay.style.display = 'block';
         updatePhase();
     }
+
+    async function loadScans() {
+        const response = await fetch('/list-scans');
+        const data = await response.json();
+
+        const container = document.getElementById('scan-list-container');
+        container.innerHTML = '';
+
+        if (data.scans && data.scans.length > 0) {
+            data.scans.forEach(scan => {
+                const li = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = `/view-scan/${scan}`;
+                link.textContent = scan;
+                li.appendChild(link);
+                container.appendChild(li);
+            });
+        } else {
+            container.textContent = 'No scans found.';
+        }
+    }
+
+    loadScans();

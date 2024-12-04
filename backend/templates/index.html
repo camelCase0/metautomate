@@ -13,6 +13,7 @@
     <h1>Pentest Application</h1>
 
     <!-- Loading Spinner -->
+    <div class="spinner-overlay" id="spinner-overlay" style="display: none;"></div>
     <div class="spinner-container" id="spinner" style="display: none;">
         <div class="icons">
             <div class="icon globe" id="globe">
@@ -37,13 +38,18 @@
         <div class="status" id="status">Initializing...</div>
     </div>
 
+    <section id="scan-list">
+        <h2>Saved Scans</h2>
+        <ul id="scan-list-container"></ul>
+    </section>
+
     <!-- Toggle button for Scan Form -->
     <button id="toggle-scan-form" onclick="toggleScanForm()">Show/Hide Network Scan</button>
 
     <!-- Network Scan Form -->
     <section id="scan" class="{% if scan_results %}hidden{% endif %}">
         <h2>Network Scan</h2>
-        <form action="/scan" method="post" onsubmit="prepareScripts()">
+        <form action="/scan" method="post" onsubmit="prepareScripts(event)">
             <label for="ip_range">Target IP Range:</label>
             <input type="text" name="ip_range" placeholder="Enter IP range (e.g., 192.168.0.0/24)" required>
 
@@ -334,6 +340,6 @@
     {% endif %}
 </section>
 
-    <script src="static/script.js"></script>
+    <script src="/static/script.js"></script>
 </body>
 </html>
