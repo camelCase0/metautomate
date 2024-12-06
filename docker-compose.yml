@@ -28,6 +28,11 @@ services:
     image: tleemcjr/metasploitable2
     networks:
       - pentest-net
+    ports:
+      - "21:21"
+      - "3306:3306"
+      - "20:20"
+      - "22:22"
     hostname: victim                  # Set hostname to 'victim'
     tty: true                         # Allocate a pseudo-TTY
     stdin_open: true                  # Keep the container running for interaction

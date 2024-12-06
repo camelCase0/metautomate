@@ -1,3 +1,4 @@
+import datetime
 import logging
 import os
 from pathlib import Path
@@ -74,8 +75,9 @@ async def start_scan(
     }
 
     scan_results = network_scan.run_scan(ip_range, options)
+    current_time = datetime.datetime.now().strftime("%d-%m-%Y_%H:%M:%S")
 
-    scan_id = f"scan_{len(os.listdir(SCAN_RESULTS_DIR)) + 1}.json"
+    scan_id = f"scan_{len(os.listdir(SCAN_RESULTS_DIR)) + 1}_{current_time}.json"
     scan_results_path = os.path.join(SCAN_RESULTS_DIR, scan_id)
     with open(scan_results_path, "w") as f:
         json.dump(scan_results, f)
